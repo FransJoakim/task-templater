@@ -1,0 +1,78 @@
+{
+  "nodeName": "ol",
+  "children": [
+    {
+      "nodeName": "li",
+      "attributes": {
+        "label": "1",
+        "class": "main"
+      },
+      "children": [
+        {
+          "nodeName": "p",
+          "children": ["Hva er et samfunn?"]
+        },
+        {
+          "nodeName": "input",
+          "attributes": {
+            "type": "text"
+          }
+        }
+      ]
+    },
+    {
+      "nodeName": "li",
+      "attributes": {
+        "label": "2"
+      },
+      "children": [
+        {
+          "nodeName": "h4",
+          "children": ["Eksempler"]
+        },
+        {
+          "nodeName": "div",
+          "children": [
+            {
+              "nodeName": "p",
+              "children": ["Skriv to eksempler på forskjellige type samfunn:"]
+            },
+            {
+              "nodeName": "ol",
+              "children": [
+                {
+                  "nodeName": "li",
+                  "attributes": {
+                    "label": "a"
+                  },
+                  "children": [
+                    {
+                      "nodeName": "input",
+                      "attributes": {
+                        "type": "text"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "nodeName": "li",
+                  "attributes": {
+                    "label": "b"
+                  },
+                  "children": [
+                    {
+                      "nodeName": "input",
+                      "attributes": {
+                        "type": "text"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
