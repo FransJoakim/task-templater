@@ -1,70 +1,91 @@
 {
-  "nodeName": "ol",
+  "id": "form",
+  "nodeName": "div",
   "children": [
     {
-      "nodeName": "li",
-      "attributes": {
-        "label": "1",
-        "class": "main"
-      },
+      "id": "c578c99d-db6b-4193-9e18-cc44536e3aa6",
+      "nodeName": "ol",
       "children": [
         {
-          "nodeName": "p",
-          "children": ["Hva er et samfunn?"]
-        },
-        {
-          "nodeName": "input",
+          "id": "a0566331-ecac-47d2-9a9b-4d285a0a9bed",
+          "nodeName": "li",
           "attributes": {
-            "type": "text"
-          }
-        }
-      ]
-    },
-    {
-      "nodeName": "li",
-      "attributes": {
-        "label": "2"
-      },
-      "children": [
-        {
-          "nodeName": "h4",
-          "children": ["Eksempler"]
-        },
-        {
-          "nodeName": "div",
+            "label": "1",
+            "className": "main"
+          },
           "children": [
             {
+              "id": "8f509476-b586-49c9-b6a3-b6b6a61f2e1b",
               "nodeName": "p",
-              "children": ["Skriv to eksempler på forskjellige type samfunn:"]
+              "children": ["Hva er et samfunn?"]
             },
             {
-              "nodeName": "ol",
+              "id": "bd5cb3a3-b7ac-456f-a68f-3afb2af78dd4",
+              "nodeName": "input",
+              "attributes": {
+                "type": "text"
+              }
+            }
+          ]
+        },
+        {
+          "id": "4161360d-7bca-49bc-b76a-dc993c7cbf18",
+          "nodeName": "li",
+          "attributes": {
+            "label": "2"
+          },
+          "children": [
+            {
+              "id": "3e965470-4fad-4ab6-b885-8333b32c9b32",
+              "nodeName": "h4",
+              "children": ["Eksempler"]
+            },
+            {
+              "id": "76da0540-e32e-4759-ac75-a757a10474de",
+              "nodeName": "div",
               "children": [
                 {
-                  "nodeName": "li",
-                  "attributes": {
-                    "label": "a"
-                  },
+                  "id": "7555f04c-14a9-44a2-89a7-0afd173dd1a7",
+                  "nodeName": "p",
                   "children": [
-                    {
-                      "nodeName": "input",
-                      "attributes": {
-                        "type": "text"
-                      }
-                    }
+                    "Skriv to eksempler på forskjellige type samfunn:"
                   ]
                 },
                 {
-                  "nodeName": "li",
-                  "attributes": {
-                    "label": "b"
-                  },
+                  "id": "b1d05756-9085-4806-9031-6cc12067b73a",
+                  "nodeName": "ol",
                   "children": [
                     {
-                      "nodeName": "input",
+                      "id": "eff01d76-2d6f-43e9-9549-ce9ecf066ffd",
+                      "nodeName": "li",
                       "attributes": {
-                        "type": "text"
-                      }
+                        "label": "a"
+                      },
+                      "children": [
+                        {
+                          "id": "b8ca7b0e-cd15-4e25-b5a0-be7e4dd44253",
+                          "nodeName": "input",
+                          "attributes": {
+                            "type": "text"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "id": "76dbd09d-fde0-4c93-b800-cb36ac145828",
+                      "nodeName": "li",
+                      "attributes": {
+                        "label": "b"
+                      },
+                      "children": [
+                        {
+                          "id": "4a4ba8ea-3a82-44a8-9b7c-76e3eefa1d30",
+                          "nodeName": "input",
+                          "attributes": {
+                            "type": "text"
+                          }
+                        }
+                      ]
                     }
                   ]
                 }
