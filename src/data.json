@@ -17,7 +17,13 @@
             {
               "id": "8f509476-b586-49c9-b6a3-b6b6a61f2e1b",
               "nodeName": "p",
-              "children": ["Hva er et samfunn?"]
+              "children": [
+                {
+                  "id": "56b0b5a9-9b9a-4b9e-9b9a-9b9a9b9a9b9c",
+                  "nodeName": "#text",
+                  "textContent": "Hva er et samfunn?"
+                }
+              ]
             },
             {
               "id": "bd5cb3a3-b7ac-456f-a68f-3afb2af78dd4",
@@ -38,7 +44,13 @@
             {
               "id": "3e965470-4fad-4ab6-b885-8333b32c9b32",
               "nodeName": "h4",
-              "children": ["Eksempler"]
+              "children": [
+                {
+                  "id": "c6b0b5a9-9b9a-4b9e-9b9a-9b9a9b9a9b9a",
+                  "nodeName": "#text",
+                  "textContent": "Eksempler"
+                }
+              ]
             },
             {
               "id": "76da0540-e32e-4759-ac75-a757a10474de",
@@ -48,7 +60,11 @@
                   "id": "7555f04c-14a9-44a2-89a7-0afd173dd1a7",
                   "nodeName": "p",
                   "children": [
-                    "Skriv to eksempler på forskjellige type samfunn:"
+                    {
+                      "id": "b6b0b5a9-9b9a-4b9e-9b9a-9b9a9b9a9b9b",
+                      "nodeName": "#text",
+                      "textContent": "Skriv to eksempler på forskjellige type samfunn:"
+                    }
                   ]
                 },
                 {

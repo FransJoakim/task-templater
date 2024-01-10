@@ -1,15 +1,17 @@
 import React from "react";
 import "./App.css";
 import data from "./data.json";
-import { atomFamily, useRecoilState } from "recoil";
+import { atomFamily, useRecoilState, useSetRecoilState } from "recoil";
 
 type Attributes = { [key: string]: string | undefined };
 
 type NodeInterface = {
   id: string;
   nodeName: string;
+  parent?: string | null;
+  children?: NodeInterface[];
   attributes?: Attributes;
-  children?: (NodeInterface | string)[];
+  textContent?: string;
 };
 
 const NodeAtom = atomFamily<NodeInterface | null, string>({
@@ -17,11 +19,34 @@ const NodeAtom = atomFamily<NodeInterface | null, string>({
   default: null,
 });
 
-const Node = ({ data }: { data: NodeInterface }) => {
-  // this whole motherfucker needs to be a object, with a method for rendering the component
-  // the values (i.e. string value) needs to be accessible (as JSON) and part of a state that could be updated
-  // this motherfucker also needs to be movable
+const InitAtoms = (data: NodeInterface, parent: string | null) => {
+  const setNode = useSetRecoilState(NodeAtom(data.id));
+  setNode({
+    ...data,
+    parent,
+    children: data.children?.map((child) => {
+      if (child.nodeName === "#text") return child;
+      return {
+        id: child.id,
+        nodeName: child.nodeName,
+      };
+    }),
+  });
+  data.children?.forEach((child) => {
+    if (child.nodeName === "#text") return;
+    InitAtoms(child, data.id);
+  });
+};
 
+interface NodeProps {
+  data: NodeInterface;
+}
+
+const Node = ({ data }: NodeProps) => {
+  const [node, setNode] = useRecoilState(NodeAtom(data.id));
+  if (!node) return null;
+
+  // rewrite: only gets data from state
   const children = !data.children
     ? null
     : data.children.map((child, i) => {
@@ -33,36 +58,30 @@ const Node = ({ data }: { data: NodeInterface }) => {
       });
   const Component = (
     <span style={{ display: "flex" }}>
-      {React.createElement(
-        data.nodeName,
-        {
-          ...data.attributes,
-          onClick: (e: React.MouseEvent<Element, MouseEvent>) => {
-            e.stopPropagation();
-            console.log("clicked", data.nodeName);
-          },
+      {React.createElement(data.nodeName, {
+        ...data.attributes,
+        onClick: (e: React.MouseEvent<Element, MouseEvent>) => {
+          e.stopPropagation();
+          console.log("clicked", data.nodeName);
         },
-        children
-      )}
+        children,
+      })}
       <button>click</button>
     </span>
   );
 
-  const [node, setNode] = useRecoilState(NodeAtom(data.id));
-  if (!node) {
-    setNode({
-      ...data,
-      children: data.children?.map((child) => {
-        // TODO: This is a hack to get around the fact that strings are not valid nodes
-        if (typeof child === "string") return "";
-        return child.id;
-      }),
-    });
-    return null;
-  }
+  // needs function to add components to state
+  // accesses and sets parent node
+  // i.e. inserts or deletes node from parent children list
+
+  return Component;
 };
 
 function App() {
+  React.useEffect(() => {
+    InitAtoms(data, null);
+  }, []);
+
   return (
     <main>
       <div className="container">
