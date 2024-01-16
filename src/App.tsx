@@ -1,78 +1,46 @@
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import "./App.css";
 import data from "./data.json";
 import {
   atomFamily,
+  useRecoilCallback,
   useRecoilState,
   useRecoilValue,
-  useSetRecoilState,
 } from "recoil";
 
 type Attributes = { [key: string]: string | undefined };
 
-type NodeInterface = {
+type BaseInterface = {
   id: string;
   nodeName: string;
-  parent?: string | null;
-  children?: NodeInterface[];
-  attributes?: Attributes;
-  textContent?: string;
 };
+
+interface NodeInterface extends BaseInterface {
+  children: BaseInterface[];
+  attributes: Attributes | null;
+  textContent: string | null;
+}
+
+interface NestedNodeInterface extends NodeInterface {
+  children: NestedNodeInterface[];
+}
 
 const NodeAtom = atomFamily<NodeInterface | null, string>({
   key: "node",
   default: null,
 });
 
-interface MountProps {
-  data: NodeInterface;
-  parent: string | null;
-}
-
-const Mount = ({ data, parent }: MountProps) => {
-  console.log(data.nodeName, data.id, parent);
-  const [node, setNode] = useRecoilState(NodeAtom(data.id));
-
-  useEffect(() => {
-    if (!node) {
-      setNode({
-        ...data,
-        parent,
-        children: data.children?.map((child) => {
-          if (child.nodeName === "#text") return child;
-          return {
-            id: child.id,
-            nodeName: child.nodeName,
-          };
-        }),
-      });
-    }
-  }, [data, node, parent, setNode]);
-
-  return (
-    <>
-      {data.children?.forEach((child) => {
-        return <Mount data={child} parent={data.id} />;
-      })}
-    </>
-  );
+const nestChildNodes = (children: BaseInterface[]) => {
+  return children?.map((child) => <Node key={child.id} id={child.id} />);
 };
 
-interface NodeProps {
-  id: string;
-}
-
-const Node = ({ id }: NodeProps) => {
+const Node = ({ id }: { id: string }) => {
+  console.log("go");
   const [node, setNode] = useRecoilState(NodeAtom(id));
+  console.log("node", node);
   if (!node) return null;
 
-  const children = node.children?.map((child, i) => {
-    if (child.nodeName === "#text") {
-      return child.textContent;
-    } else {
-      return <Node key={i} id={child.id} />;
-    }
-  });
+  const children = nestChildNodes(node.children);
   const Component = (
     <span style={{ display: "flex" }}>
       {React.createElement(node.nodeName, {
@@ -97,18 +65,55 @@ const Node = ({ id }: NodeProps) => {
 function App() {
   const init = useRef(false);
 
-  if (!init.current) return <Mount data={data} parent="form" />;
-
-  return (
-    <main>
-      <div className="container">
-        <form>
-          <Node id={data.id} />
-          <input type="submit" value="Submit" />
-        </form>
-      </div>
-    </main>
+  const setAtom = useRecoilCallback(
+    ({ set }) =>
+      (node: NestedNodeInterface) => {
+        console.log("set", {
+          ...node,
+          children: data.children?.map((child) => ({
+            id: child.id,
+            nodeName: child.nodeName,
+          })),
+        });
+        set(NodeAtom(node.id), {
+          ...node,
+          children: data.children?.map((child) => ({
+            id: child.id,
+            nodeName: child.nodeName,
+          })),
+        });
+      }
   );
+
+  const nestAtom = useCallback(
+    (node: NestedNodeInterface) => {
+      node.children.forEach((child) => {
+        nestAtom(child);
+      });
+      setAtom(node);
+    },
+    [setAtom]
+  );
+
+  useEffect(() => {
+    if (!init.current) {
+      data.children.forEach((child) => {
+        nestAtom(child);
+      });
+      setAtom(data);
+      init.current = true;
+    }
+  }, [nestAtom, setAtom]);
+
+  return <></>;
+  // <main>
+  //   <div className="container">
+  //     <form>
+  //       <Node id="form" />
+  //       <input type="submit" value="Submit" />
+  //     </form>
+  //   </div>
+  // </main>
 }
 
 export default App;

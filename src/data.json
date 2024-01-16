@@ -1,6 +1,6 @@
 {
   "id": "form",
-  "nodeName": "div",
+  "nodeName": "form div",
   "children": [
     {
       "id": "c578c99d-db6b-4193-9e18-cc44536e3aa6",
@@ -21,18 +21,25 @@
                 {
                   "id": "56b0b5a9-9b9a-4b9e-9b9a-9b9a9b9a9b9c",
                   "nodeName": "#text",
-                  "textContent": "Hva er et samfunn?"
+                  "textContent": "Hva er et samfunn?",
+                  "children": [],
+                  "attributes": null
                 }
-              ]
+              ],
+              "textContent": null,
+              "attributes": null
             },
             {
               "id": "bd5cb3a3-b7ac-456f-a68f-3afb2af78dd4",
               "nodeName": "input",
               "attributes": {
                 "type": "text"
-              }
+              },
+              "children": [],
+              "textContent": null
             }
-          ]
+          ],
+          "textContent": null
         },
         {
           "id": "4161360d-7bca-49bc-b76a-dc993c7cbf18",
@@ -48,9 +55,13 @@
                 {
                   "id": "c6b0b5a9-9b9a-4b9e-9b9a-9b9a9b9a9b9a",
                   "nodeName": "#text",
-                  "textContent": "Eksempler"
+                  "textContent": "Eksempler",
+                  "children": [],
+                  "attributes": null
                 }
-              ]
+              ],
+              "textContent": null,
+              "attributes": null
             },
             {
               "id": "76da0540-e32e-4759-ac75-a757a10474de",
@@ -63,9 +74,13 @@
                     {
                       "id": "b6b0b5a9-9b9a-4b9e-9b9a-9b9a9b9a9b9b",
                       "nodeName": "#text",
-                      "textContent": "Skriv to eksempler på forskjellige type samfunn:"
+                      "textContent": "Skriv to eksempler på forskjellige type samfunn:",
+                      "children": [],
+                      "attributes": null
                     }
-                  ]
+                  ],
+                  "textContent": null,
+                  "attributes": null
                 },
                 {
                   "id": "b1d05756-9085-4806-9031-6cc12067b73a",
@@ -83,9 +98,12 @@
                           "nodeName": "input",
                           "attributes": {
                             "type": "text"
-                          }
+                          },
+                          "children": [],
+                          "textContent": null
                         }
-                      ]
+                      ],
+                      "textContent": null
                     },
                     {
                       "id": "76dbd09d-fde0-4c93-b800-cb36ac145828",
@@ -99,17 +117,29 @@
                           "nodeName": "input",
                           "attributes": {
                             "type": "text"
-                          }
+                          },
+                          "children": [],
+                          "textContent": null
                         }
-                      ]
+                      ],
+                      "textContent": null
                     }
-                  ]
+                  ],
+                  "textContent": null,
+                  "attributes": null
                 }
-              ]
+              ],
+              "textContent": null,
+              "attributes": null
             }
-          ]
+          ],
+          "textContent": null
         }
-      ]
+      ],
+      "textContent": null,
+      "attributes": null
     }
-  ]
+  ],
+  "textContent": null,
+  "attributes": null
 }
