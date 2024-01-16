@@ -1,28 +1,15 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import "./App.css";
 import data from "./data.json";
-import {
-  atomFamily,
-  useRecoilCallback,
-  useRecoilState,
-  useRecoilValue,
-} from "recoil";
+import { atomFamily, useRecoilCallback, useRecoilValue } from "recoil";
 
 type Attributes = { [key: string]: string | undefined };
-
-type BaseInterface = {
+interface NodeInterface {
   id: string;
   nodeName: string;
-};
-
-interface NodeInterface extends BaseInterface {
-  children: BaseInterface[];
+  children: NodeInterface[];
   attributes: Attributes | null;
   textContent: string | null;
-}
-
-interface NestedNodeInterface extends NodeInterface {
-  children: NestedNodeInterface[];
 }
 
 const NodeAtom = atomFamily<NodeInterface | null, string>({
@@ -33,22 +20,19 @@ const NodeAtom = atomFamily<NodeInterface | null, string>({
 function App() {
   const init = useRef(false);
 
-  const setAtom = useRecoilCallback(
-    ({ set }) =>
-      (node: NestedNodeInterface) => {
-        console.log("setAtom", node.nodeName);
-        set(NodeAtom(node.id), {
-          ...node,
-          children: data.children?.map((child) => ({
-            id: child.id,
-            nodeName: child.nodeName,
-          })),
-        });
-      }
-  );
+  const setAtom = useRecoilCallback(({ set }) => (node: NodeInterface) => {
+    console.log("setAtom", node.nodeName);
+    set(NodeAtom(node.id), {
+      ...node,
+      children: data.children?.map((child) => ({
+        ...child,
+        children: [],
+      })),
+    });
+  });
 
   const nestAtom = useCallback(
-    (node: NestedNodeInterface) => {
+    (node: NodeInterface) => {
       node.children.forEach((child) => {
         nestAtom(child);
       });
@@ -59,20 +43,11 @@ function App() {
 
   useEffect(() => {
     if (!init.current) {
-      data.children.forEach((child) => {
-        nestAtom(child);
-      });
-      setAtom(data);
+      nestAtom(data);
       init.current = true;
     }
-  }, [nestAtom, setAtom]);
+  }, [nestAtom]);
 
-  const nestChildNodes = (children: BaseInterface[]) => {
-    return children?.map((child) => {
-      console.log("child", child.nodeName);
-      return <Node key={child.id} id={child.id} />;
-    });
-  };
   const OtherNode5 = ({ id }: { id: string }) => {
     const node = useRecoilValue(NodeAtom(id));
     console.log("node", node?.nodeName);
@@ -91,18 +66,23 @@ function App() {
     const node = useRecoilValue(NodeAtom(id));
     console.log("node", node?.nodeName);
     if (!node) return null;
+    const children = node.children.map((childNode) => childNode.textContent);
     if (node.nodeName === "#text") return node.textContent;
-    return React.createElement(
-      node.nodeName,
-      null,
-      <OtherNode4 id={"56b0b5a9-9b9a-4b9e-9b9a-9b9a9b9a9b9c"} />
-    );
+    return React.createElement(node.nodeName, null, children);
   };
   const OtherNode2 = ({ id }: { id: string }) => {
     const node = useRecoilValue(NodeAtom(id));
     console.log("node", node?.nodeName);
     if (!node) return null;
     if (node.nodeName === "#text") return node.textContent;
+    const children = node.children.map((childNode, i) => {
+      return (!!i ? 
+        <OtherNode3 id={"8f509476-b586-49c9-b6a3-b6b6a61f2e1b"} />,
+      :
+      <OtherNode5 id={"bd5cb3a3-b7ac-456f-a68f-3afb2af78dd4"} />,
+      )
+    });
+
     return React.createElement(node.nodeName, null, [
       <OtherNode3 id={"8f509476-b586-49c9-b6a3-b6b6a61f2e1b"} />,
       <OtherNode5 id={"bd5cb3a3-b7ac-456f-a68f-3afb2af78dd4"} />,
@@ -125,23 +105,34 @@ function App() {
     console.log("node", node?.nodeName);
     if (!node) return null;
 
-    return React.createElement(
-      "button",
-      null,
-      <OtherNode1 id={"c578c99d-db6b-4193-9e18-cc44536e3aa6"} />
-    );
-    // return React.createElement(
-    //   node.nodeName,
-    //   null,
-    //   nestChildNodes(node.children)
-    // );
+    // if (node.nodeName === "#text") return node.textContent;
+    // if (node.nodeName === "input") return <input />;
+    // if (node.nodeName === "p")
+    //   return (
+    //     <p>
+    //       {node.children.map((childNode) => (
+    //         <Node id={childNode.id} />
+    //       ))}
+    //     </p>
+    //   );
+    // if (node.nodeName === "div")
+    //   return (
+    //     <div>
+    //       {node.children.map((childNode) => (
+    //         <Node id={childNode.id} />
+    //       ))}
+    //     </div>
+    //   );
   };
 
   return (
     <main>
       <div className="container">
         <form>
-          <Node id="form" />
+          <OtherNode2 id={data.id} />
+          {/* {data.children.map((childNode) => (
+            <Node id={childNode.id} />
+          ))} */}
           {/* <input type="submit" value="Submit" /> */}
         </form>
       </div>

@@ -1,143 +1,30 @@
 {
   "id": "form",
-  "nodeName": "button",
+  "nodeName": "div",
   "children": [
     {
-      "id": "c578c99d-db6b-4193-9e18-cc44536e3aa6",
-      "nodeName": "ol",
+      "id": "8f509476-b586-49c9-b6a3-b6b6a61f2e1b",
+      "nodeName": "p",
       "children": [
         {
-          "id": "a0566331-ecac-47d2-9a9b-4d285a0a9bed",
-          "nodeName": "li",
-          "attributes": {
-            "label": "1",
-            "className": "main"
-          },
-          "children": [
-            {
-              "id": "8f509476-b586-49c9-b6a3-b6b6a61f2e1b",
-              "nodeName": "p",
-              "children": [
-                {
-                  "id": "56b0b5a9-9b9a-4b9e-9b9a-9b9a9b9a9b9c",
-                  "nodeName": "#text",
-                  "textContent": "Hva er et samfunn?",
-                  "children": [],
-                  "attributes": null
-                }
-              ],
-              "textContent": null,
-              "attributes": null
-            },
-            {
-              "id": "bd5cb3a3-b7ac-456f-a68f-3afb2af78dd4",
-              "nodeName": "input",
-              "attributes": {
-                "type": "text"
-              },
-              "children": [],
-              "textContent": null
-            }
-          ],
-          "textContent": null
-        },
-        {
-          "id": "4161360d-7bca-49bc-b76a-dc993c7cbf18",
-          "nodeName": "li",
-          "attributes": {
-            "label": "2"
-          },
-          "children": [
-            {
-              "id": "3e965470-4fad-4ab6-b885-8333b32c9b32",
-              "nodeName": "h4",
-              "children": [
-                {
-                  "id": "c6b0b5a9-9b9a-4b9e-9b9a-9b9a9b9a9b9a",
-                  "nodeName": "#text",
-                  "textContent": "Eksempler",
-                  "children": [],
-                  "attributes": null
-                }
-              ],
-              "textContent": null,
-              "attributes": null
-            },
-            {
-              "id": "76da0540-e32e-4759-ac75-a757a10474de",
-              "nodeName": "div",
-              "children": [
-                {
-                  "id": "7555f04c-14a9-44a2-89a7-0afd173dd1a7",
-                  "nodeName": "p",
-                  "children": [
-                    {
-                      "id": "b6b0b5a9-9b9a-4b9e-9b9a-9b9a9b9a9b9b",
-                      "nodeName": "#text",
-                      "textContent": "Skriv to eksempler på forskjellige type samfunn:",
-                      "children": [],
-                      "attributes": null
-                    }
-                  ],
-                  "textContent": null,
-                  "attributes": null
-                },
-                {
-                  "id": "b1d05756-9085-4806-9031-6cc12067b73a",
-                  "nodeName": "ol",
-                  "children": [
-                    {
-                      "id": "eff01d76-2d6f-43e9-9549-ce9ecf066ffd",
-                      "nodeName": "li",
-                      "attributes": {
-                        "label": "a"
-                      },
-                      "children": [
-                        {
-                          "id": "b8ca7b0e-cd15-4e25-b5a0-be7e4dd44253",
-                          "nodeName": "input",
-                          "attributes": {
-                            "type": "text"
-                          },
-                          "children": [],
-                          "textContent": null
-                        }
-                      ],
-                      "textContent": null
-                    },
-                    {
-                      "id": "76dbd09d-fde0-4c93-b800-cb36ac145828",
-                      "nodeName": "li",
-                      "attributes": {
-                        "label": "b"
-                      },
-                      "children": [
-                        {
-                          "id": "4a4ba8ea-3a82-44a8-9b7c-76e3eefa1d30",
-                          "nodeName": "input",
-                          "attributes": {
-                            "type": "text"
-                          },
-                          "children": [],
-                          "textContent": null
-                        }
-                      ],
-                      "textContent": null
-                    }
-                  ],
-                  "textContent": null,
-                  "attributes": null
-                }
-              ],
-              "textContent": null,
-              "attributes": null
-            }
-          ],
-          "textContent": null
+          "id": "56b0b5a9-9b9a-4b9e-9b9a-9b9a9b9a9b9c",
+          "nodeName": "#text",
+          "textContent": "Hva er et samfunn?",
+          "children": [],
+          "attributes": null
         }
       ],
       "textContent": null,
       "attributes": null
+    },
+    {
+      "id": "bd5cb3a3-b7ac-456f-a68f-3afb2af78dd4",
+      "nodeName": "input",
+      "attributes": {
+        "type": "text"
+      },
+      "children": [],
+      "textContent": null
     }
   ],
   "textContent": null,
