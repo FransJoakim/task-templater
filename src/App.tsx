@@ -28,13 +28,6 @@ const NodeAtom = atomFamily<NodeInterface, string>({
     attributes: null,
     textContent: null,
   }),
-  effects: [
-    ({ onSet }) => {
-      onSet((children) => {
-        console.log("Current user ID:", children);
-      });
-    },
-  ],
 });
 
 // @ts-ignore
@@ -91,7 +84,6 @@ const foo = {
 const Node = ({ id }: { id: string }) => {
   const [node, setNode] = useRecoilState(NodeAtom(id));
   if (!node.nodeName) return null;
-  console.log(node.nodeName, node.id, node.children);
 
   if (node.nodeName === "#text") {
     if (node.textContent === null) return null;
