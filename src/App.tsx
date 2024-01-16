@@ -30,51 +30,13 @@ const NodeAtom = atomFamily<NodeInterface | null, string>({
   default: null,
 });
 
-const nestChildNodes = (children: BaseInterface[]) => {
-  return children?.map((child) => <Node key={child.id} id={child.id} />);
-};
-
-const Node = ({ id }: { id: string }) => {
-  console.log("go");
-  const [node, setNode] = useRecoilState(NodeAtom(id));
-  console.log("node", node);
-  if (!node) return null;
-
-  const children = nestChildNodes(node.children);
-  const Component = (
-    <span style={{ display: "flex" }}>
-      {React.createElement(node.nodeName, {
-        ...node.attributes,
-        onClick: (e: React.MouseEvent<Element, MouseEvent>) => {
-          e.stopPropagation();
-          console.log("clicked", node.nodeName);
-        },
-        children,
-      })}
-      <button>click</button>
-    </span>
-  );
-
-  // needs function to add components to state
-  // accesses and sets parent node
-  // i.e. inserts or deletes node from parent children list
-
-  return Component;
-};
-
 function App() {
   const init = useRef(false);
 
   const setAtom = useRecoilCallback(
     ({ set }) =>
       (node: NestedNodeInterface) => {
-        console.log("set", {
-          ...node,
-          children: data.children?.map((child) => ({
-            id: child.id,
-            nodeName: child.nodeName,
-          })),
-        });
+        console.log("setAtom", node.nodeName);
         set(NodeAtom(node.id), {
           ...node,
           children: data.children?.map((child) => ({
@@ -105,15 +67,86 @@ function App() {
     }
   }, [nestAtom, setAtom]);
 
-  return <></>;
-  // <main>
-  //   <div className="container">
-  //     <form>
-  //       <Node id="form" />
-  //       <input type="submit" value="Submit" />
-  //     </form>
-  //   </div>
-  // </main>
+  const nestChildNodes = (children: BaseInterface[]) => {
+    return children?.map((child) => {
+      console.log("child", child.nodeName);
+      return <Node key={child.id} id={child.id} />;
+    });
+  };
+  const OtherNode5 = ({ id }: { id: string }) => {
+    const node = useRecoilValue(NodeAtom(id));
+    console.log("node", node?.nodeName);
+    if (!node) return null;
+    if (node.nodeName === "#text") return node.textContent;
+    return React.createElement(node.nodeName, null, null);
+  };
+  const OtherNode4 = ({ id }: { id: string }) => {
+    const node = useRecoilValue(NodeAtom(id));
+    console.log("node", node?.nodeName);
+    if (!node) return null;
+    if (node.nodeName === "#text") return node.textContent;
+    return React.createElement(node.nodeName, null, null);
+  };
+  const OtherNode3 = ({ id }: { id: string }) => {
+    const node = useRecoilValue(NodeAtom(id));
+    console.log("node", node?.nodeName);
+    if (!node) return null;
+    if (node.nodeName === "#text") return node.textContent;
+    return React.createElement(
+      node.nodeName,
+      null,
+      <OtherNode4 id={"56b0b5a9-9b9a-4b9e-9b9a-9b9a9b9a9b9c"} />
+    );
+  };
+  const OtherNode2 = ({ id }: { id: string }) => {
+    const node = useRecoilValue(NodeAtom(id));
+    console.log("node", node?.nodeName);
+    if (!node) return null;
+    if (node.nodeName === "#text") return node.textContent;
+    return React.createElement(node.nodeName, null, [
+      <OtherNode3 id={"8f509476-b586-49c9-b6a3-b6b6a61f2e1b"} />,
+      <OtherNode5 id={"bd5cb3a3-b7ac-456f-a68f-3afb2af78dd4"} />,
+    ]);
+  };
+  const OtherNode1 = ({ id }: { id: string }) => {
+    const node = useRecoilValue(NodeAtom(id));
+    console.log("node", node?.nodeName);
+    if (!node) return null;
+    if (node.nodeName === "#text") return node.textContent;
+    return React.createElement(
+      node.nodeName,
+      null,
+      <OtherNode2 id={"a0566331-ecac-47d2-9a9b-4d285a0a9bed"} />
+    );
+  };
+
+  const Node = ({ id }: { id: string }) => {
+    const node = useRecoilValue(NodeAtom(id));
+    console.log("node", node?.nodeName);
+    if (!node) return null;
+
+    return React.createElement(
+      "button",
+      null,
+      <OtherNode1 id={"c578c99d-db6b-4193-9e18-cc44536e3aa6"} />
+    );
+    // return React.createElement(
+    //   node.nodeName,
+    //   null,
+    //   nestChildNodes(node.children)
+    // );
+  };
+
+  return (
+    <main>
+      <div className="container">
+        <form>
+          <Node id="form" />
+          {/* <input type="submit" value="Submit" /> */}
+        </form>
+      </div>
+    </main>
+  );
 }
 
 export default App;
